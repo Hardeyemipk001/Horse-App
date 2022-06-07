@@ -1,6 +1,8 @@
 package com.example.horseapp;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -10,6 +12,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,6 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.horseapp.databinding.ActivityMapsBinding;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Struct;
 import java.text.SimpleDateFormat;
@@ -24,8 +29,11 @@ import java.util.Date;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    MainAdapter mainAdapter;
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+    RecyclerView recyclerView;
+
 
 
     @Override
@@ -34,6 +42,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        recyclerView =(RecyclerView)findViewById(R.id.rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FirebaseRecyclerOptions<MainModel> options =
+                new FirebaseRecyclerOptions.Builder<MainModel>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Students Details"), MainModel.class)
+                        .build();
+
+        mainAdapter = new MainAdapter(options);
+        recyclerView.setAdapter(mainAdapter);
+
+
+
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -65,8 +87,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
        // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mainAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mainAdapter.stopListening();
+    }
+
 
     public void list(View view) {
-
     }
 }

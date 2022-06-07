@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "400184380421",
+    "firebase_url": "https://agile-fortress-349915-default-rtdb.firebaseio.com",
+    "project_id": "agile-fortress-349915",
+    "storage_bucket": "agile-fortress-349915.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400184380421:android:7c6693505fd374d3aae06c",
+        "android_client_info": {
+          "package_name": "com.example.horseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400184380421-n8ikm9d4apu3musbc9vdou5rdvfuhkmm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN8ULbhq0a7tQXaqG30-Luvk0wwijySnM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400184380421-n8ikm9d4apu3musbc9vdou5rdvfuhkmm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
